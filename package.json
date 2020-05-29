@@ -1,6 +1,6 @@
 {
   "name": "fullscreen-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component that sets its children to fullscreen using the Fullscreen API.",
   "main": "index.js",
   "scripts": {
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/liran/fullscreen-react/issues"
   },
-  "homepage": "https://github.com/liran/fullscreen-react#readme"
+  "homepage": "https://github.com/liran/fullscreen-react#readme",
+  "dependencies": {
+    "react": "^16.13.1"
+  }
 }
