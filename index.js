@@ -37,31 +37,41 @@ function isFullscreen() {
 }
 
 export default function FullScreen({ isEnter, onChange = (e) => e, children }) {
-  const ref = useRef(null);
+  let domNode = null;
 
   useEffect(() => {
-    if (ref.current) {
+    if (domNode) {
       if (isEnter) {
-        requestFullscreen(ref.current);
+        requestFullscreen(domNode);
       } else {
         exitFullscreen();
       }
     }
-  }, [isEnter, ref]);
+  }, [isEnter, domNode]);
 
   useEffect(() => {
     const cb = () => {
       onChange(isFullscreen());
     };
 
-    document.addEventListener('fullscreenchange', cb);
+    document.addEventListener("fullscreenchange", cb);
     return () => {
-      document.removeEventListener('fullscreenchange', cb);
+      document.removeEventListener("fullscreenchange", cb);
     };
   }, [onChange]);
 
-  const childrenWithProps = React.Children.map(children, (child) =>
-    React.cloneElement(child, { ref })
-  );
-  return childrenWithProps;
+  if (!children) return null;
+
+  const refFunc = (dom) => {
+    domNode = dom;
+
+    // The ref of the child element
+    if (children.ref instanceof Function) {
+      children.ref(dom);
+    } else if (children.ref) {
+      children.ref.current = dom;
+    }
+  };
+
+  return React.cloneElement(children, { ref: refFunc });
 }
