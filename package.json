@@ -1,11 +1,12 @@
 {
   "name": "fullscreen-react",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A React component that sets its children to fullscreen using the Fullscreen API.",
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "yarn run build",
-    "build": "babel index.js --out-dir ./dist"
+    "build": "babel index.js --out-dir ./dist",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
