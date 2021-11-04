@@ -36,7 +36,7 @@ function App() {
       </button>
 
       <Fullscreen isEnter={isEnter} onChange={setIsEnter}>
-        <div className="full-screenable-node">
+        <div>
           Hi! This may cover the entire monitor.
         </div>
       </Fullscreen>
