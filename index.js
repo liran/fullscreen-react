@@ -25,7 +25,7 @@ export default function FullScreen({ isEnter, onChange = (e) => e, children }) {
         try {
           onChange(screenfull.isFullscreen);
         } catch (e) {
-          console.debug("Catching Fullscreen error for request or exit to prevent TypeError: fullscreen error");
+          console.debug("Catching Fullscreen error for change to prevent TypeError: fullscreen error");
           console.error(e); //e.g. "TypeError: fullscreen error"
         }
       };
