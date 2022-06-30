@@ -6,10 +6,15 @@ export default function FullScreen({ isEnter, onChange = (e) => e, children }) {
 
   useEffect(() => {
     if (domNode && screenfull.isEnabled) {
-      if (isEnter) {
-        screenfull.request(domNode);
-      } else {
-        screenfull.exit();
+      try {
+        if (isEnter) {
+          screenfull.request(domNode);
+        } else {
+          screenfull.exit();
+        }
+      } catch (e) {
+        console.debug("Catching Fullscreen error for request or exit to prevent TypeError: fullscreen error");
+        console.error(e); //e.g. "TypeError: fullscreen error"
       }
     }
   }, [isEnter, domNode]);
@@ -17,7 +22,12 @@ export default function FullScreen({ isEnter, onChange = (e) => e, children }) {
   useEffect(() => {
     if (screenfull.isEnabled) {
       const cb = () => {
-        onChange(screenfull.isFullscreen);
+        try {
+          onChange(screenfull.isFullscreen);
+        } catch (e) {
+          console.debug("Catching Fullscreen error for change to prevent TypeError: fullscreen error");
+          console.error(e); //e.g. "TypeError: fullscreen error"
+        }
       };
 
       screenfull.on("change", cb);
